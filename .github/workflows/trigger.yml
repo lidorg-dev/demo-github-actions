@@ -29,11 +29,11 @@ jobs:
         #       --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
         #       --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"${{ github.repository }}"'" }}'
         - name: Trigger the other repository's workflow
-          uses: peter-evans/repository-dispatch@v2
+          uses: peter-evans/repository-dispatch@v1
           with:
               repository: ${{ github.repository }}
               token: ${{ secrets.GITHUB_TOKEN }}
-              event-type: update
+              event-type: opened
               client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
