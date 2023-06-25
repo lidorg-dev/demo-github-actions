@@ -23,7 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         - name: trigger another workflow
-          uses: |
+          run: |
               curl -X POST https://api.github.com/repos/:userName/:repoName/dispatches \
               -H 'Accept: application/vnd.github.everest-preview+json' \
               --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
