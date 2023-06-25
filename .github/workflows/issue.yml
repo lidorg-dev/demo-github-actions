@@ -5,8 +5,8 @@ name: Create Issue on Commit
 # Controls when the workflow will run
 on:
   repository_dispatch:
-    types: [opened]
-  workflow_dispatch:  
+    types: next
+ # workflow_dispatch:  
   # Triggers the workflow on push or pull request events but only for the "main" branch
 # push:
 #    branches: [ "develop" ]

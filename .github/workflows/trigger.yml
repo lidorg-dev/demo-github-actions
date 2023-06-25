@@ -31,9 +31,9 @@ jobs:
         - name: Trigger the other repository's workflow
           uses: peter-evans/repository-dispatch@v1
           with:
-              repository: ${{ github.repository }}
-              token: ${{ secrets.GITHUB_TOKEN }}
-              event-type: opened
+              repository: lidorg-dev/demo-github-actions
+              token: ${{ secrets.REPO_ACCESS_TOKEN }}
+              event-type: next
               client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
