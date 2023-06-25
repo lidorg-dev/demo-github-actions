@@ -34,7 +34,7 @@ jobs:
            --header 'content-type: application/json' \
             -H "X-GitHub-Api-Version: 2022-11-28" \
            --data '{
-           "title": "automated Issue for commit: ${{ github.sha }}"
+           "title": "automated Issue for commit: ${{ github.sha }}",
            "body": "This issue was automatically created by the github actions
            workflow **${{ github.workflow }}**. \n\n The commit has was: _${{ github.sha }}_."
            }'
