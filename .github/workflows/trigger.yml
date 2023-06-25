@@ -24,10 +24,10 @@ jobs:
     steps:
         - name: trigger another workflow
           run: |
-              curl -X POST https://api.github.com/repos/${{ github.repository }}/dispatches \
-              -H 'Accept: application/vnd.github.everest-preview+json' \
+              curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/issue.yml/dispatches \
+              -H 'Accept: application/vnd.github.v3+json' \
               --header 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}' \
-              --data '{"event_type": "next", "client_payload": { "repository": "'"${{ github.repository }}"'" }}'
+              --data '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}" }'
         # - name: Trigger the other repository's workflow
         #   uses: peter-evans/repository-dispatch@v1
         #   with:
