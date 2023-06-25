@@ -5,7 +5,7 @@ name: Create Issue on Commit
 # Controls when the workflow will run
 on:
   repository_dispatch:
-    types: [Trigger Workflow]
+    types: [doit]
   # Triggers the workflow on push or pull request events but only for the "main" branch
 # push:
 #    branches: [ "develop" ]
@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     #  - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
+     # Runs a single command using the runners shell
        - name: create issue using REST API
          run: |
            curl --request POST \
@@ -39,7 +39,13 @@ jobs:
               "title": "automated Issue for commit: Test",
               "body": "This issue was automatically created by the github actions workflow **${{ github.workflow }}**. \n\n The commit has was: _test_."
               }'
-
+        # - name: Trigger the other repository's workflow
+        #   uses: peter-evans/repository-dispatch@v1
+        #   with:
+        #       repository: ${{ github.repository }}
+        #       token: ${{ secrets.GITHUB_TOKEN }}
+        #       event-type: doit
+        #       client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
       # - name: Create issue different
       #   run: |
       #     curl -L \

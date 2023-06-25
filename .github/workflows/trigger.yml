@@ -6,7 +6,7 @@ name: trigger workflow
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "develop" ]
+    
 #  pull_request:
 #    branches: [ "main" ]
 
@@ -22,12 +22,19 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-        - name: trigger another workflow
-          run: |
-              curl -X POST https://api.github.com/repos/${{ github.repository }}/dispatches \
-              -H 'Accept: application/vnd.github.everest-preview+json' \
-              --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-              --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"${{ github.repository }}"'" }}'
+        # - name: trigger another workflow
+        #   run: |
+        #       curl -X POST https://api.github.com/repos/${{ github.repository }}/dispatches \
+        #       -H 'Accept: application/vnd.github.everest-preview+json' \
+        #       --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        #       --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"${{ github.repository }}"'" }}'
+        - name: Trigger the other repository's workflow
+          uses: peter-evans/repository-dispatch@v1
+          with:
+              repository: ${{ github.repository }}
+              token: ${{ secrets.GITHUB_TOKEN }}
+              event-type: doit
+              client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     #  - uses: actions/checkout@v3
