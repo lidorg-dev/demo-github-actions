@@ -33,7 +33,7 @@ jobs:
           with:
               repository: ${{ github.repository }}
               token: ${{ secrets.GITHUB_TOKEN }}
-              event-type: doit
+              event-type: update
               client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
